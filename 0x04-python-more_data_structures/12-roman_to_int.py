@@ -1,41 +1,40 @@
 #!/usr/bin/python3
+def to_subtract(list_num):
+    to_sub = 0
+    max_list = max(list_num)
+
+    for n in list_num:
+        if max_list > n:
+            to_sub += n
+
+    return (max_list - to_sub)
 
 
 def roman_to_int(roman_string):
-    """
-    Converts a Roman numeral to an integer.
-
-    Args:
-        roman_string: The Roman numeral string to convert.
-
-    Returns:
-        The integer value of the Roman numeral, or 0 if invalid input.
-    """
-
-    if not isinstance(roman_string, str) or roman_string is None:
+    if not roman_string:
         return 0
 
-    roman_numerals = {
-        "I": 1,
-        "V": 5,
-        "X": 10,
-        "L": 50,
-        "C": 100,
-        "D": 500,
-        "M": 1000
-    }
+    if not isinstance(roman_string, str):
+        return 0
 
-    result = 0
-    i = 0
-    while i < len(roman_string):
-        current_char = roman_string[i]
-        next_char = roman_string[i + 1] if i + 1 < len(roman_string) else None
+    rom_n = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+    list_keys = list(rom_n.keys())
 
-        if next_char is not None and roman_numerals[current_char] < roman_numerals[next_char]:
-            result += roman_numerals[next_char] - roman_numerals[current_char]
-            i += 2
-        else:
-            result += roman_numerals[current_char]
-            i += 1
+    num = 0
+    last_rom = 0
+    list_num = [0]
 
-    return result
+    for ch in roman_string:
+        for r_num in list_keys:
+            if r_num == ch:
+                if rom_n.get(ch) <= last_rom:
+                    num += to_subtract(list_num)
+                    list_num = [rom_n.get(ch)]
+                else:
+                    list_num.append(rom_n.get(ch))
+
+                last_rom = rom_n.get(ch)
+
+    num += to_subtract(list_num)
+
+    return (num)
