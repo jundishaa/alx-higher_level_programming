@@ -1,7 +1,8 @@
--- Script to display the average temperature (Fahrenheit) by city ordered by temperature (descending)
+-- Task: Write a SQL script to display the average temperature (in Fahrenheit) by city ordered by temperature (descending)
 
--- Calculate average temperature in Fahrenheit by city and order by temperature (descending)
-SELECT city, AVG(temperature * 9 / 5 + 32) AS average_temperature_fahrenheit
-FROM imported_table_name
+-- Selecting the city and calculating the average temperature for each city from the temperatures table
+-- Ordering the results by the average temperature in descending order
+SELECT city, AVG(temperature) AS avg_temp
+FROM temperatures
 GROUP BY city
-ORDER BY average_temperature_fahrenheit DESC;
+ORDER BY avg_temp DESC;
