@@ -1,12 +1,7 @@
--- Task: Write a SQL script to display the top 3 cities' temperatures during July and August ordered by temperature (descending)
-
--- SELECTING THE CITY AND CALCULATING THE AVERAGE TEMPERATURE FOR EACH CITY DURING JULY AND AUGUST FROM THE TEMPERATURES TABLE
--- FILTERING THE DATA FOR JULY AND AUGUST USING THE MONTH FUNCTION
--- ORDERING THE RESULTS BY THE AVERAGE TEMPERATURE IN DESCENDING ORDER
--- LIMITING THE OUTPUT TO THE TOP 3 CITIES
+-- Retrieve top 3 cities with highest average temperature during July and August
 SELECT city, AVG(temperature) AS avg_temp
-FROM temperatures
-WHERE MONTH(date) IN (7, 8)
+FROM imported_table_name
+WHERE MONTH(date) IN (7, 8)  -- Select only July and August data
 GROUP BY city
 ORDER BY avg_temp DESC
-LIMIT 3;
+LIMIT 3;  -- Limit the results to top 3
